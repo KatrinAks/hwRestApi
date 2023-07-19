@@ -30,7 +30,7 @@ class MobileBankApiTestV1 {
 
 
     @Test
-    void shouldReturnDemoAccountsBody() {
+    void shouldReturnDemoAccountsBodyType() {
         // Given - When - Then
         // Предусловия
         given()
@@ -59,5 +59,21 @@ class MobileBankApiTestV1 {
                 .statusCode(200)
                 //.body(matchesJsonSchemaInClasspath("accounts.schema.json"))
                 .body("[1].currency", equalTo("USD"));
+    }
+
+    @Test
+    void shouldReturnDemoAccountsBodyCurrencyRub() {
+        // Given - When - Then
+        // Предусловия
+        given()
+                .baseUri("http://localhost:9999/api/v1")
+                // Выполняемые действия
+                .when()
+                .get("/demo/accounts")
+                // Проверки
+                .then()
+                .statusCode(200)
+                //.body(matchesJsonSchemaInClasspath("accounts.schema.json"))
+                .body("[2].currency", equalTo("RUB"));
     }
 }
